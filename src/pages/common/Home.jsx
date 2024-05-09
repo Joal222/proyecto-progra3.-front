@@ -1,41 +1,42 @@
 import React from "react";
-import { getAllUsers } from "../../services/testService";
-import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
-import { Button } from "@nextui-org/react";
-
-export const Home = () => {
-  const { data, isPending, error, isError } = useQuery({
-    queryKey: ["all_users"],
-    queryFn: getAllUsers,
-  });
-
-  const mostrtarToas = () => {
-    toast.warning("Este es una alerta");
-  };
-
-  if (isPending) {
-    return <span>Loading...</span>;
-  }
-
-  if (isError) {
-    return <span>Error: {error.message}</span>;
-  }
-
+import NavBar from "./NavBar";
+import ImageSlider from "../../components/Slider/ImageSlider";
+function Home() {
   return (
-    <div>
-      <ul>
-        {data.data?.map((user) => (
-          <li key={user.id}>
-            {user.id} - {user.name}
-          </li>
-        ))}
-      </ul>
-      <Link to="/test">Ir a Test</Link>
-      <Button type="button" color="primary" radius="lg" onClick={mostrtarToas}>
-        Mostar Toast
-      </Button>
-    </div>
+    <>
+      <div
+        className="min-h-screen flex flex-col bg-background/50" 
+        style={{
+          backgroundImage: `url('https://www.tripsavvy.com/thmb/I8Jknos29suM3Nm0MQDlNb2aecw=/2121x1414/filters:fill(auto,1)/RivieraMaya-5ace16741f4e13003c7c850b.jpg')`,
+          backgroundSize: 'cover', // Asegura que la imagen cubra todo el div
+          backgroundPosition: 'center', // Centra la imagen en el div
+          backgroundRepeat: 'no-repeat', // Evita que la imagen se repita
+          filter: 'brightness(80%)' 
+        }}> 
+          <div className="min-h-screen flex flex-col">
+            <div className="flex flex-col w-full h-1/5">
+              <NavBar />
+            </div>
+            <div className="flex-grow flex h-3/5 justify-center items-center">
+              <div className="flex flex-row w-full h-full">
+                <div className="container mx-auto w-3/5 bg-background/25 backdrop-saturate-110 font-bold">
+                  <h1 className="text-4xl text-center mt-20">Welcome to MyApp</h1>
+                  
+                  <p className="text-center mt-5">
+                    This is a simple app made with NextUI
+                  </p>
+                  <p>
+                    hoola
+                  </p>
+                </div>
+                <div className="w-1/5 ml-auto mr-8" >
+                  <ImageSlider/>
+                </div>
+              </div>  
+            </div>
+          </div>
+      </div>
+    </>
   );
-};
+}
+export default Home;
