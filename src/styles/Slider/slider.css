@@ -1,0 +1,59 @@
+/* Estilo de marco para los puntos del slider */
+.slick-dots li {
+    margin: 0 15px; /* Espacio entre los puntos */
+}
+
+.slick-dots li button {
+    font-size: 0; /* Elimina el punto visible */
+    width: 40px; /* Ancho del marco */
+    height: 10px; /* Altura del marco */
+    background: black; /* Fondo transparente */
+    border: 2px solid #000000; /* Borde sólido */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 2px; /* Espacio dentro del botón */
+}
+
+.slick-dots li button:hover {
+    transform: scale(1.1);
+    background: #686666; /* Color de fondo para el punto al pasar el mouse */
+}q
+.slick-dots li.slick-active button {
+    border-color: #000000; /* Color del borde para el slide activo */
+}
+
+/* Estilos generales para las flechas */
+.slick-arrow {
+    background-color: #fff; /* Fondo blanco */
+    border-radius: 50%; /* Forma redonda */
+    width: 40px; /* Ancho del botón */
+    height: 40px; /* Alto del botón */
+    display: flex; /* Uso de Flexbox para centrar el ícono dentro del botón */
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente */
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1); /* Sombra sutil */
+    transition: transform 0.3s ease-in-out; /* Efecto suave al interactuar */
+}
+
+.slick-arrow:hover {
+    transform: scale(1.1); /* Efecto de escala al pasar el mouse */
+    background-color: #ccc; /* Cambio de color al pasar el mouse */
+}
+
+/* Estilos para la flecha izquierda */
+.slick-prev {
+    left: 10px; /* Posición a la izquierda */
+    z-index: 1; /* Asegurarse de que esté sobre otros elementos */
+}
+
+/* Estilos para la flecha derecha */
+.slick-next {
+    right: 10px; /* Posición a la derecha */
+    z-index: 1; /* Asegurarse de que esté sobre otros elementos */
+}
+
+/* Cambiar el color y tamaño de los íconos de las flechas si es necesario */
+.slick-prev:before, .slick-next:before {
+    font-size: 20px; /* Tamaño del ícono */
+    color: black; /* Color del ícono */
+    opacity: 0.75; /* Opacidad del ícono */
+}
