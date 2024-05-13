@@ -9,6 +9,11 @@ export const user = new axios.create(
   });
 
 
+  export const paises = new axios.create(
+    {
+      baseURL: "https://restcountries.com/v3.1",
+    }
+  );
   
 //Ejemplo
   export const vuelos = new axios.create(

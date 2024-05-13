@@ -1,5 +1,5 @@
 import React from 'react';
-import { Modal, ModalContent, ModalHeader, ModalBody, Tabs, Tab, Input, Button, ModalFooter, Link } from '@nextui-org/react';
+import { Modal, ModalContent, ModalHeader, ModalBody, Tabs, Tab, Input, Button, ModalFooter, Link, Select } from '@nextui-org/react';
 import { useAuth } from '../../hooks/UseAuth'; // Asegúrate de que la ruta de importación es correcta
 
 function Auth({ isOpen, onOpenChange }) {
@@ -81,14 +81,20 @@ function Auth({ isOpen, onOpenChange }) {
                 onChange={(e) => handleInputChange(e, 'sign-up')}
                 name="pasaporte"
               />              
-              <Input className="m-2"
+              <select
+                className="m-2" // Asegúrate de aplicar las mismas clases CSS
                 isRequired
-                label="Nacionalidad"
-                placeholder="Ingrese su nacionalidad"
-                value={signUpData.nation} // Asegúrate de añadir esto
+                value={signUpData.nation} // Asigna el valor actual
                 onChange={(e) => handleInputChange(e, 'sign-up')}
                 name="nation"
-              />
+              >
+                <option value="">Selecciona una nacionalidad</option>
+                <option value="ES">España</option>
+                <option value="MX">México</option>
+                <option value="AR">Argentina</option>
+                {/* Agrega más opciones según tus necesidades */}
+              </select>
+
               <Input className="m-2"
                 isRequired
                 label="Número de teléfono"
