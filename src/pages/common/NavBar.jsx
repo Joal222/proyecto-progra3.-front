@@ -12,7 +12,7 @@ function NavBar() {
     <>
       <Navbar className="bg-background/05 backdrop-saturate-110" >
         <NavbarBrand>
-          <Link to="/">Avionistas</Link>
+          <Link to="/">El Avionazo</Link>
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-8" justify="center">
           <NavbarItem>
@@ -24,7 +24,7 @@ function NavBar() {
             </Link>
           </NavbarItem>
           <NavbarItem>
-            <Link to="/integrations">
+            <Link to="/buscar-vuelos">
               Consultar Vuelo
             </Link>
           </NavbarItem>

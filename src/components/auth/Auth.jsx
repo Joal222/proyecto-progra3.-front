@@ -1,6 +1,7 @@
-import React from 'react';
-import { Modal, ModalContent, ModalHeader, ModalBody, Tabs, Tab, Input, Button, ModalFooter, Link, Select } from '@nextui-org/react';
-import { useAuth } from '../../hooks/UseAuth'; // Asegúrate de que la ruta de importación es correcta
+import React, { useState } from 'react';
+import { Modal, ModalContent, ModalHeader, ModalBody, Tabs, Tab, Input, Button, ModalFooter, Link } from '@nextui-org/react';
+import { useAuth } from '../../hooks/UseAuth'; 
+import  CountrySelect  from './CountrySelect';
 
 function Auth({ isOpen, onOpenChange }) {
   const {
@@ -11,6 +12,8 @@ function Auth({ isOpen, onOpenChange }) {
     handleSignUp,
     handleLogin
   } = useAuth(onOpenChange);
+
+  const [selectedCountryCode, setSelectedCountryCode] = useState(''); // Nuevo estado para almacenar el código de área del país seleccionado
 
   const modalWidth = selected === "sign-up" ? "max-w-4xl" : "max-w-lg";
 
@@ -80,21 +83,10 @@ function Auth({ isOpen, onOpenChange }) {
                 value={signUpData.pasaporte} // Asegúrate de añadir esto
                 onChange={(e) => handleInputChange(e, 'sign-up')}
                 name="pasaporte"
-              />              
-              <select
-                className="m-2" // Asegúrate de aplicar las mismas clases CSS
-                isRequired
-                value={signUpData.nation} // Asigna el valor actual
-                onChange={(e) => handleInputChange(e, 'sign-up')}
-                name="nation"
-              >
-                <option value="">Selecciona una nacionalidad</option>
-                <option value="ES">España</option>
-                <option value="MX">México</option>
-                <option value="AR">Argentina</option>
-                {/* Agrega más opciones según tus necesidades */}
-              </select>
-
+              />
+              
+              <CountrySelect onSelect={(country) => setSelectedCountryCode(country.idd.root)} /> 
+              
               <Input className="m-2"
                 isRequired
                 label="Número de teléfono"
@@ -140,14 +132,14 @@ function Auth({ isOpen, onOpenChange }) {
               onChange={(e) => handleInputChange(e, 'sign-up')}
               name="fechaNacimiento"
                />
-              <Input className="m-2"
+             <Input className="m-2"
                 isRequired
                 label="Código de área telefónico del país"
                 placeholder="Código de área"
-                value={signUpData.codigoAreaPais} // Asegúrate de añadir esto
-                onChange={(e) => handleInputChange(e, 'sign-up')}
+                value={selectedCountryCode}
+                onChange={(e) => setSelectedCountryCode(e.target.value)}
                 name="codigoAreaPais"
-              />               
+              />
               <Input className="m-2"
                 isRequired
                 label="Número para emergencias"

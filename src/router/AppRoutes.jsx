@@ -1,7 +1,7 @@
 import React from "react";
 import { HashRouter, Routes, Route } from "react-router-dom";
 import Home  from "../pages/common/Home";
-import BuscarVuelos from "../pages/vuelos/BuscarVuelos"
+import BuscarVuelos from "../pages/Vuelos/BuscarVuelos"
 
 
 export const AppRoutes = () => {
