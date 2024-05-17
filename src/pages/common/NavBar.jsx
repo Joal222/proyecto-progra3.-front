@@ -16,7 +16,7 @@ function NavBar() {
         </NavbarBrand>
         <NavbarContent className="hidden sm:flex gap-8" justify="center">
           <NavbarItem>
-            <Link to="/buscar-vuelos">Vuelos</Link>
+            <Link to="/crear-vuelos">Vuelos</Link>
           </NavbarItem>
           <NavbarItem isActive>
             <Link to="/customers">

@@ -46,10 +46,10 @@ function TablaBuscarVuelo({ vueloId }) {
       <TableBody>
         {filteredData.map((vuelo) => (
           <TableRow key={vuelo.id}>
-            <TableCell>{vuelo.id}</TableCell>
-            <TableCell>{vuelo.aerolineaId}</TableCell>
-            <TableCell>{vuelo.aeropuertoSalidaId}</TableCell>
-            <TableCell>{vuelo.aeropuertoLlegadaId}</TableCell>
+            <TableCell>{vuelo.avionId.marca + ' ' + vuelo.avionId.modelo}</TableCell>
+            <TableCell>{vuelo.aerolineaId.nombre}</TableCell>
+            <TableCell>{vuelo.aeropuertoSalidaId.nombre}</TableCell>
+            <TableCell>{vuelo.aeropuertoLlegadaId.nombre}</TableCell>
             <TableCell>{formatDate(vuelo.fechaHoraSalida)}</TableCell>
             <TableCell>{formatDate(vuelo.fechaHoraLlegada)}</TableCell>
           </TableRow>
