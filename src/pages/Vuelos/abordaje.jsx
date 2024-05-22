@@ -3,7 +3,7 @@ import NavBarSystem from '../../components/NavBarSystem/navBarSistem';
 import '../../styles/common/StarBackground.css'; // Asegúrate de tener este archivo CSS en la ruta correcta
 
 
-function CreacionVuelo() {
+function abordaje() {
   return (
     <div className="h-screen w-screen">
       <div className="stars flex flex-col justify-center items-center border-cyan-400">
@@ -11,10 +11,11 @@ function CreacionVuelo() {
         <NavBarSystem />
         </div>
         <div className='flex flex-1'>
+            <h1 className='text-white'>vuelos-abordaje</h1>
         </div>
       </div>
     </div>
   );
 }
 
-export default CreacionVuelo;
+export default abordaje;

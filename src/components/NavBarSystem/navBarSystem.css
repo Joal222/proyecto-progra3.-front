@@ -1,16 +1,14 @@
-/* Estilos para los enlaces */
-.page-link {
-    font-size: 25px;
+a {
+    font-size: 15px;
     transition: color 0.3s; /* Suaviza la transición del color */
     color: inherit; /* Hereda el color de texto inicial del padre o especifica un color predeterminado aquí */
 }
 
-.page-link:hover {
+a:hover {
     transform: scale(1.1);
-    color: white; /* Cambia el color a blanco al pasar el mouse */
+    color: rgb(43, 79, 197); /* Cambia el color a blanco al pasar el mouse */
 }
 
-/* Estilos para la barra de navegación */
 .navbar {
     backdrop-filter: none !important;
-}
+  }

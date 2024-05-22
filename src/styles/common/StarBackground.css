@@ -1,0 +1,20 @@
+@keyframes moveStars {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: 1000px 5000px; /* Estos valores controlan la velocidad y dirección del movimiento */
+    }
+  }
+  
+  .stars {
+    animation: moveStars 200s linear infinite; /* Aumenta la duración para ralentizar */
+    background-image: url('../../image/redesSociales/istockphoto-1433856358-612x612.jpg'); /* Asegúrate de usar tu propia imagen de estrellas */
+    background-repeat: repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%;
+  }
+  .stars {
+    border: 2px solid cyan; /* Esto es un ejemplo, ajusta según tu configuración de Tailwind */
+  }

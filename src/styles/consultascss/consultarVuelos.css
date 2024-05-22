@@ -1,0 +1,11 @@
+.modal-container {
+    position: relative; /* Asegura que el modal se base en la posición de este contenedor */
+  }
+  
+  .modal-content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%; /* Ajustar según sea necesario */
+  }
+  
