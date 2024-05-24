@@ -1,89 +1,43 @@
-import { useState } from 'react';
-import { signUp, login } from '../services/authService'; // Asegúrate de importar correctamente
-import  AlertToastify from './AlertToastify'
-
-
+import { useState, useContext } from "react";
+import { signUp, login } from "../services/authService";
+import { AuthContext } from "../context/authContext";
 
 export const useAuth = (onOpenChange) => {
+  const { setUser } = useContext(AuthContext);
   const [selected, setSelected] = useState("login");
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: ""
-  });
-  const [signUpData, setSignUpData] = useState({
-    pasaporte: "",
-    nombres: "",
-    apellidos: "",
-    fechaNacimiento: "",
-    nation: "",
-    email: "",
-    codigoAreaPais: "",
-    tel: "",
-    telEmergencias: "",
-    direccion: "",
-    password: ""
-  });
-  const [error, setError] = useState("");
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [signUpData, setSignUpData] = useState({ nombres: "", apellidos: "", email: "", password: "" });
+  const [error, setError] = useState(null);
 
-  
-  // Validaciones
-  const validateEmail = (email) => {
-    return email.includes('@');
-  };
-
-  const validatePassword = (password) => {
-    return password.length >= 6;
-  };
-
-  const handleInputChange = (event, type) => {
-    const { name, value } = event.target;
-    if (name === 'email' || name === 'password') {
-        setError(''); // Limpiar errores para campos específicos
-    }
-    if (type === 'login') {
-      setLoginData(prev => ({ ...prev, [name]: value }));
+  const handleInputChange = (e, form) => {
+    const { name, value } = e.target;
+    if (form === "login") {
+      setLoginData({ ...loginData, [name]: value });
     } else {
-      setSignUpData(prev => ({ ...prev, [name]: value }));
+      setSignUpData({ ...signUpData, [name]: value });
     }
   };
 
-  const handleSignUp = async (event) => {
-    event.preventDefault();
-     // Ejecutar validaciones
-     if (!validateEmail(signUpData.email)) {
-        setError("Por favor introduce un correo electrónico válido.");
-        return;
-      }
-      if (!validatePassword(signUpData.password)) {
-        setError("La contraseña debe tener al menos 6 caracteres.");
-        return;
-      }
-
+  const handleSignUp = async (e) => {
+    e.preventDefault();
     try {
-      const data = await signUp(signUpData);
-      console.log("Registration Successful", data);
-      AlertToastify('success','Usuario Creado')
+      await signUp(signUpData);
       onOpenChange(false);
-      setError('');
+      toast.success('User registered successfully!');
     } catch (error) {
-      setError("Registration Failed: " + error.message);
+      setError(error.message);
     }
   };
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    if (!validateEmail(loginData.email) || !validatePassword(loginData.password)) {
-        setError("Correo electrónico o contraseña inválidos.");
-        return;
-      }
-  
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
-      const response = await login(loginData);
-      console.log("Login successful", response);
+      const data = await login(loginData);
+      setUser({ email: loginData.email }); // Actualiza el contexto con la información del usuario
       onOpenChange(false);
-      AlertToastify('success','Logueado Exitosamente')
+      toast.success('Login successful!');
     } catch (error) {
-      setError("Login Failed: " + (error.response?.data?.message || 'Failed to login'));
+      setError(error.message);
     }
   };
 
@@ -95,4 +49,4 @@ export const useAuth = (onOpenChange) => {
     handleSignUp,
     handleLogin
   };
-}
+};

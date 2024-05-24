@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { Modal, ModalContent, ModalHeader, ModalBody, Tabs, Tab, Input, Button, ModalFooter, Link } from '@nextui-org/react';
 import { useAuth } from '../../hooks/UseAuth'; 
-import  CountrySelect  from './CountrySelect';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import  CountrySelect  from './CountrySelect';
 
 function Auth({ isOpen, onOpenChange }) {
   const {
@@ -13,11 +15,13 @@ function Auth({ isOpen, onOpenChange }) {
     handleLogin
   } = useAuth(onOpenChange);
 
-  const [selectedCountryCode, setSelectedCountryCode] = useState(''); // Nuevo estado para almacenar el código de área del país seleccionado
+  // const [selectedCountryCode, setSelectedCountryCode] = useState(''); // Nuevo estado para almacenar el código de área del país seleccionado
 
   const modalWidth = selected === "sign-up" ? "max-w-4xl" : "max-w-lg";
 
   return (
+    <>
+    <ToastContainer position="top-right" autoClose={5000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     <Modal isOpen={isOpen} onOpenChange={onOpenChange} placement="top-center" className="bg-background/65 backdrop-saturate-110">
       <ModalContent className={modalWidth}>
         <ModalHeader>
@@ -75,7 +79,7 @@ function Auth({ isOpen, onOpenChange }) {
                 onChange={(e) => handleInputChange(e, 'sign-up')}
                 name="nombres"
               />
-              <Input className="m-2"
+              {/* <Input className="m-2"
                 isRequired
                 label="Número de pasaporte"
                 placeholder="Ingrese su número de pasaporte"
@@ -83,11 +87,11 @@ function Auth({ isOpen, onOpenChange }) {
                 value={signUpData.pasaporte} // Asegúrate de añadir esto
                 onChange={(e) => handleInputChange(e, 'sign-up')}
                 name="pasaporte"
-              />
+              /> */}
               
-              <CountrySelect onSelect={(country) => setSelectedCountryCode(country.idd.root)} /> 
+              {/* <CountrySelect onSelect={(country) => setSelectedCountryCode(country.idd.root)} />  */}
               
-              <Input className="m-2"
+              {/* <Input className="m-2"
                 isRequired
                 label="Número de teléfono"
                 placeholder="Número de teléfono"
@@ -96,15 +100,15 @@ function Auth({ isOpen, onOpenChange }) {
                 value={signUpData.tel} // Asegúrate de añadir esto
                 onChange={(e) => handleInputChange(e, 'sign-up')}
                 name="tel"
-              />
-              <Input className="m-2"
+              /> */}
+              {/* <Input className="m-2"
                 isRequired
                 label="Dirección"
                 placeholder="Ingrese su dirección"
                 value={signUpData.direccion} // Asegúrate de añadir esto
                 onChange={(e) => handleInputChange(e, 'sign-up')}
                 name="direccion"
-              />   
+              />    */}
               <Input className="m-2"
                 isRequired
                 label="Contraseña"
@@ -124,30 +128,30 @@ function Auth({ isOpen, onOpenChange }) {
                 onChange={(e) => handleInputChange(e, 'sign-up')}
                 name="apellidos"
               />
-               <Input className="m-2" 
+               {/* <Input className="m-2" 
               isRequired 
               label="Fecha de nacimiento" 
               type="date"
               value={signUpData.fechaNacimiento} // Asegúrate de añadir esto
               onChange={(e) => handleInputChange(e, 'sign-up')}
               name="fechaNacimiento"
-               />
-             <Input className="m-2"
+               /> */}
+             {/* <Input className="m-2"
                 isRequired
                 label="Código de área telefónico del país"
                 placeholder="Código de área"
                 value={selectedCountryCode}
                 onChange={(e) => setSelectedCountryCode(e.target.value)}
                 name="codigoAreaPais"
-              />
-              <Input className="m-2"
+              /> */}
+              {/* <Input className="m-2"
                 isRequired
                 label="Número para emergencias"
                 placeholder="Número de emergencias"
                 value={signUpData.telEmergencias} // Asegúrate de añadir esto
                 onChange={(e) => handleInputChange(e, 'sign-up')}
                 name="telEmergencias"
-              />
+              /> */}
               <Input className="m-2"
                 isRequired
                 label="Correo electrónico"
@@ -189,8 +193,8 @@ function Auth({ isOpen, onOpenChange }) {
         </ModalFooter>
       </ModalContent>
     </Modal>
+    </>
   );
 }
 
 export default Auth;
-
