@@ -12,6 +12,7 @@ import ConsultarVuelo from "../pages/consultas/consultarVuelos"
 import Abordaje from "../pages/Vuelos/abordaje"
 import CrearVuelo from "../pages/aerolinea/crear-vuelo"
 import CrearTripulacion from "../pages/aerolinea/crear-tripulacion"
+import ComprarBoleto from "../pages/cliente/comprarBoleto"
 
 export const AppRoutes = () => {
   return (
@@ -29,6 +30,7 @@ export const AppRoutes = () => {
         <Route path="/crear-vuelo" element={<CrearVuelo />} />  
         <Route path="/crear-tripulacion" element={<CrearTripulacion />} />  
         <Route path="/vuelo-abordaje" element={<Abordaje />} />  
+        <Route path="/comprar-boleto" element={<ComprarBoleto/>}  /> 
         <Route path="*" element={<div>404 Pagina No Encontrada</div>} />
       </Routes>
     </HashRouter>

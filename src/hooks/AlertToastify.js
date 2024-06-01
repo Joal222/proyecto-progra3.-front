@@ -1,7 +1,7 @@
 import React from "react";
 import { toast } from "react-toastify";
 
-	const AlertToastify = (type, message) => {
+	const alertToastify = (type, message) => {
     switch (type) {
         case "success":
         toast.success(message, {
@@ -49,4 +49,4 @@ import { toast } from "react-toastify";
     }
     }
 
-    export default AlertToastify;
+    export default alertToastify;

@@ -26,9 +26,13 @@ export const AuthProvider = ({ children }) => {
     if (jwtToken) {
       const decodedToken = decodeToken(jwtToken);
       if (decodedToken && new Date(decodedToken.exp * 1000) > new Date()) {
-        setUser({ email: decodedToken.sub });
+        setUser({
+          email: decodedToken.sub,
+          role: decodedToken.role
+        });
       } else {
         localStorage.removeItem('token');
+        setUser(null);
       }
     }
   }, []);

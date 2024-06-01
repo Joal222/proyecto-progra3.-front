@@ -26,7 +26,7 @@ function NavBar() {
             <Link to="/crear-vuelos" className="page-link">Vuelos</Link>
           </NavbarItem>
           <NavbarItem isActive>
-            <Link to="/customers" className="page-link">Hoteles</Link>
+            <Link to="/comprar-boleto" className="page-link">Hoteles</Link>
           </NavbarItem>
           <NavbarItem>
             <Link to="/buscar-vuelos" className="page-link">Consultar Vuelo</Link>
