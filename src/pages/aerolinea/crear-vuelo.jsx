@@ -7,10 +7,10 @@ function crearVuelo() {
   return (
     <div className="h-screen w-screen">
       <div className="stars flex flex-col justify-center items-center border-cyan-400">
-        <div className='w-5/6 h-1/6 border-cyan-400 stars m-2 rounded-lg'>
+        <div className='w-full h-16 stars rounded-lg'>
         <NavBarSystem />
         </div>
-        <div className='flex flex-1'>
+        <div className='flex flex-1 h-full w-full justify-around justify-center items-center bg-gray-400'>
             <h1 className='text-white'>Crear-Vuelo</h1>
         </div>
       </div>

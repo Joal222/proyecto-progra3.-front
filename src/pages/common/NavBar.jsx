@@ -1,13 +1,13 @@
-// src/pages/common/NavBar.jsx
 import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
-import { Navbar, NavbarBrand, NavbarContent, NavbarItem, useDisclosure } from "@nextui-org/react";
+import { Navbar, NavbarBrand, NavbarContent, NavbarItem } from "@nextui-org/react";
 import { FiLogOut } from 'react-icons/fi';
 import { AuthContext } from "../../context/authContext";
-import Auth from "../../components/auth/Auth";
+import { useAuthModal } from '../../context/AuthModalContext';
+import AuthModal from "../../components/auth/Auth";
 
 function NavBar() {
-  const { isOpen: isOpenLogin, onOpen: onOpenLogin, onClose: onCloseLogin } = useDisclosure(false);
+  const { openAuthModal } = useAuthModal();
   const { user, setUser } = useContext(AuthContext);
 
   const handleLogout = () => {
@@ -17,37 +17,37 @@ function NavBar() {
 
   return (
     <>
-      <Navbar className="bg-background/05 backdrop-saturate-110 navbar">
-        <NavbarBrand>
-          <Link to="/" className="page-link">El Avionazo</Link>
+      <Navbar className="bg-background/01 backdrop-saturate-110 navbar text-black flex justify-around">
+        <NavbarBrand className='text-8xl'>
+          <Link to="/" className="page-link text-4xl">El Avionazo</Link>
         </NavbarBrand>
-        <NavbarContent className="hidden sm:flex gap-8" justify="center">
+        <NavbarContent className="hidden sm:flex gap-8 text-6xl" justify="center">
           <NavbarItem>
-            <Link to="/crear-vuelos" className="page-link">Vuelos</Link>
+            <Link to="/dashBoard" className="page-link text-2xl">Vuelos</Link>
           </NavbarItem>
           <NavbarItem isActive>
-            <Link to="/comprar-boleto" className="page-link">Hoteles</Link>
+            <Link to="/comprar-boleto" className="page-link text-2xl">Hoteles</Link>
           </NavbarItem>
           <NavbarItem>
-            <Link to="/buscar-vuelos" className="page-link">Consultar Vuelo</Link>
+            <Link to="/buscar-vuelos" className="page-link text-2xl">Consultar Vuelo</Link>
           </NavbarItem>
         </NavbarContent>
         <NavbarContent justify="end">
           <NavbarItem className="hidden lg:flex items-center">
             {user ? (
               <>
-                <span className="page-link">Hola, {user.email}</span>
+                <span className="page-link text-1xl">{user.email}</span>
                 <button onClick={handleLogout} className="ml-4">
                   <FiLogOut size={24} />
                 </button>
               </>
             ) : (
-              <a href="#" className="page-link" onClick={(e) => { e.preventDefault(); onOpenLogin(); }}>Login</a>
+              <a href="#" className="page-link text-2xl" onClick={(e) => { e.preventDefault(); openAuthModal(); }}>Login</a>
             )}
           </NavbarItem>
         </NavbarContent>
       </Navbar>
-      <Auth isOpen={isOpenLogin} onOpenChange={onCloseLogin} />
+      <AuthModal />
     </>
   );
 }

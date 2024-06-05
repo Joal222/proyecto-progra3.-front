@@ -7,10 +7,10 @@ function consultarEquipaje() {
   return (
     <div className="h-screen w-screen">
       <div className="stars flex flex-col justify-center items-center border-cyan-400">
-        <div className='w-5/6 h-1/6 border-cyan-400 stars m-2 rounded-lg'>
+      <div className='w-full h-16 stars rounded-lg'>
         <NavBarSystem />
         </div>
-        <div className='flex flex-1 h-5/6 w-5/6 justify-around justify-center items-center'>
+        <div className='flex flex-1 h-full w-full justify-around justify-center items-center bg-gray-400'>
           <div className='w-2/6 flex items-center'>
             <div className="w-full max-w-xl flex flex-col items-start gap-4">
               <Input>
@@ -20,13 +20,13 @@ function consultarEquipaje() {
               <Button
                 fullWidth
                 auto
-                className='bg-transparent text-cyan-400 rounded-lg border-2 border-cyan-500'
+                className='bg-transparent text-black rounded-lg border-2 border-black'
               > Filtrar Por Numero De Vuelo
               </Button>
             </div>
           </div>
-          <div className='w-3/6 h-5/6 rounded-lg border-2 border-cyan-500'>
-						<div className="text-4xl text-center text-white m-8"> Reporte Equipaje</div>
+          <div className='w-3/6 h-5/6 rounded-lg border-2 border-black'>
+						<div className="text-4xl text-center text-black m-8"> Reporte Equipaje</div>
 							<div className="text-2xl  text-cyan-500 m-8">
                 <Table aria-label="Tabla de vuelos">
                   <TableHeader className='text-black'>

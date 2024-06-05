@@ -7,7 +7,7 @@ function comprarBoleto() {
 
   return (
     <div className="flex justify-center items-center"> 
-        <AirplaneLayout totalSeats={18} seatsPerRow={3} vipSeats={4} />
+        <AirplaneLayout totalSeats={50} seatsPerRow={2} vipSeats={10} />
     </div>
   );
 }

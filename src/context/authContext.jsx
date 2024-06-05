@@ -3,8 +3,7 @@ import React, { createContext, useState, useEffect } from 'react';
 
 export const AuthContext = createContext(null);
 
-// Función para decodificar el token JWT
-const decodeToken = (token) => {
+export const decodeToken = (token) => {
   try {
     const base64Url = token.split('.')[1];
     const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');

@@ -1,14 +1,17 @@
+// src/hooks/UseAuth.js
 import { useState, useContext } from "react";
 import { signUp, login } from "../services/authService";
-import { AuthContext } from "../context/authContext";
-import  AlertToastify  from "./AlertToastify"
+import { AuthContext, decodeToken } from "../context/authContext";
+import AlertToastify from "./AlertToastify";
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 
 export const useAuth = (onOpenChange) => {
   const { setUser } = useContext(AuthContext);
   const [selected, setSelected] = useState("login");
   const [loginData, setLoginData] = useState({ email: "", password: "" });
-  const [signUpData, setSignUpData] = useState({ firstName: "", lastName: "", email: "", password: "",confirmPassword: ""  });
+  const [signUpData, setSignUpData] = useState({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "" });
   const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Usar useNavigate para redirigir
 
   const handleInputChange = (e, form) => {
     const { name, value } = e.target;
@@ -18,7 +21,6 @@ export const useAuth = (onOpenChange) => {
       setSignUpData({ ...signUpData, [name]: value });
     }
   };
-
 
   const validatePassword = (password) => {
     const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
@@ -45,7 +47,7 @@ export const useAuth = (onOpenChange) => {
         setSelected("login"); 
         onOpenChange(true); 
       }, 10); 
-      AlertToastify('success','Usuario Creado con Exito!');
+      AlertToastify('success', 'Usuario Creado con Exito!');
     } catch (error) {
       if (error.response && error.response.data) {
         if (error.response.status === 400) {
@@ -64,11 +66,19 @@ export const useAuth = (onOpenChange) => {
     e.preventDefault();
     try {
       const data = await login(loginData);
-      setUser({ email: loginData.email }); // Actualiza el contexto con la información del usuario
+      const decodedToken = decodeToken(data.token);
+      setUser({ email: loginData.email, role: decodedToken.role }); // Actualiza el contexto con la información del usuario
+
+      if (decodedToken.role === 'ADMIN') {
+        navigate('/dashBoard'); // Redirige a crear-vuelo
+      } else {
+        navigate('/'); // Redirige a la página principal
+      }
+
       onOpenChange(false);
-      AlertToastify('success','Inicio de sesion Exitoso!');
+      AlertToastify('success', 'Inicio de sesión Exitoso!');
     } catch (error) {
-      AlertToastify('error','Correo o Contraseña Incorrectas!');
+      AlertToastify('error', 'Correo o Contraseña Incorrectas!');
     }
   };
 

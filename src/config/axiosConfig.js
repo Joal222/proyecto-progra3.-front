@@ -1,3 +1,4 @@
+// src/config/axiosConfig.js
 import axios from "axios";
 
 // Configuración base de Axios
@@ -30,18 +31,39 @@ axiosInstance.interceptors.response.use(response => response, error => {
 
 export default axiosInstance;
 
+// Exportación de otros axios instances
+export const paises = axios.create({
+  baseURL: "https://restcountries.com/v3.1",
+});
 
-  export const paises = new axios.create(
-    {
-      baseURL: "https://restcountries.com/v3.1",
+// Instancia de Axios para vuelos
+export const vuelos = axios.create({
+  baseURL: "http://localhost:8080/api/vuelos",
+});
+
+// Interceptor para adjuntar el token JWT a cada solicitud saliente en la instancia vuelos
+vuelos.interceptors.request.use(function(config) {
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
-  );
-  
-  //PARTEVUELO
-  export const vuelos = new axios.create(
-    {
-      baseURL: "http://localhost:8080/api/vuelos",
+    return config;
+}, function(error) {
+    return Promise.reject(error);
+});
+
+// Instancia de Axios para reportes
+export const reportes = axios.create({
+  baseURL: "http://localhost:8080/api/reports",
+});
+
+// Interceptor para adjuntar el token JWT a cada solicitud saliente en la instancia reportes
+reportes.interceptors.request.use(function(config) {
+    const token = localStorage.getItem('token');
+    if (token) {
+        config.headers.Authorization = `Bearer ${token}`;
     }
-  );
-  
-  
+    return config;
+}, function(error) {
+    return Promise.reject(error);
+});

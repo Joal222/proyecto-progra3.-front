@@ -16,10 +16,10 @@ function ConsultarVuelo() {
   return (
     <div className="h-screen w-screen">
       <div className="stars flex flex-col justify-center items-center border-cyan-400">
-        <div className='w-5/6 h-1/6 border-cyan-400 stars m-2 rounded-lg'>
+        <div className='w-full h-16 stars rounded-lg'>
           <NavBarSystem />
         </div>
-        <div className='flex flex-1 h-5/6 w-5/6 justify-around justify-center items-center'>
+        <div className='flex flex-1 h-full w-full justify-around justify-center items-center bg-gray-400'>
           <div className='w-2/6 flex items-center'>
             <div className="w-5/8 max-w-xl flex flex-col items-start gap-4">
               <DateRangePicker
@@ -32,14 +32,14 @@ function ConsultarVuelo() {
               <Button
                 fullWidth
                 auto
-                className='bg-transparent text-cyan-400 rounded-lg border-2 border-cyan-500'
+                className='bg-transparent text-black rounded-lg border-2 border-black'
               > Filtrar Por Rango de fechas
               </Button>
             </div>
           </div>
-          <div className='w-4/6 h-5/6 rounded-lg border-2 border-cyan-500'>
-						<div className="text-4xl text-center text-white m-8"> Reporte Vuelos</div>
-							<div className="text-2xl  text-cyan-500 m-8">
+          <div className='w-4/6 h-5/6 rounded-lg border-2 border-black'>
+						<div className="text-4xl text-center text-black m-8"> Reporte Vuelos</div>
+							<div className="text-2xl  text-black m-8">
                 <Table aria-label="Tabla de vuelos">
                   <TableHeader className='text-black'>
                     <TableColumn className='text-black'>No Vuelo</TableColumn>
