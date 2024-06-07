@@ -23,12 +23,6 @@ const AppRoutes = () => {
       <Route path="/" element={<Home />} />
       <Route path="/not-authorized" element={<NotAuthorized />} />
       <Route path="/buscar-vuelos" element={<BuscarVuelos />} />     
-      <Route path="/consultar-aerolineas" element={<ConsultarAerolineas />} />
-      <Route path="/consultar-vuelos" element={<ConsultarVuelo />} />
-      <Route path="/consultar-destinos" element={<ConsultarDestinos />} />
-      <Route path="/consultar-equipaje" element={<ConsultarEquipaje />} />
-      <Route path="/consultar-pasajero" element={<PasajerosPorVuelo />} />
-      <Route path="/crear-vuelo" element={<CrearVuelo />} />
       <Route path="/crear-tripulacion" element={<CrearTripulacion />} />
       <Route path="/vuelo-abordaje" element={<Abordaje />} />
       <Route path="/comprar-boleto" element={<ComprarBoleto />} />
@@ -38,6 +32,12 @@ const AppRoutes = () => {
       <Route element={<ProtectedRoute role="ADMIN" />}>
         <Route path="/dashBoard" element={<DashboardEmpleado />} />
         <Route path="/consultar-aviones" element={<ConsultarAviones />} />
+        <Route path="/consultar-aerolineas" element={<ConsultarAerolineas />} />
+        <Route path="/consultar-vuelos" element={<ConsultarVuelo />} />
+        <Route path="/consultar-destinos" element={<ConsultarDestinos />} />
+        <Route path="/consultar-equipaje" element={<ConsultarEquipaje />} />
+        <Route path="/consultar-pasajero" element={<PasajerosPorVuelo />} />
+        <Route path="/crear-vuelo" element={<CrearVuelo />} />
       </Route>
       {/* Puedes agregar más rutas protegidas según sea necesario */}
     </Routes>

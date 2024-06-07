@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import NavBarSystem from '../../components/NavBarSystem/navBarSistem';
 import '../../styles/common/StarBackground.css';
 import { Select, SelectItem, Table, TableHeader, TableColumn, TableBody, TableRow, TableCell } from '@nextui-org/react';
-import { useAerolineas, usePlanes } from '../../hooks/reporteConsultaAviones'; // Asegúrate de que la ruta es correcta
+import { useAerolineas, usePlanes } from '../../hooks/reporteConsultaAviones';
 
 function ConsultarAviones() {
   const { dataVuelos, loading: loadingAerolineas, error: errorAerolineas } = useAerolineas();

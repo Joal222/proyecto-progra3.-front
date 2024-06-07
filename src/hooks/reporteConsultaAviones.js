@@ -1,6 +1,6 @@
-// src/hooks/reporteConsultaAviones.js
 import { useState, useEffect } from 'react';
 import { getAllAerolineas, getPlanesByAirlineId } from '../services/reportesVuelos';
+
 
 const useAerolineas = () => {
   const [dataVuelos, setDataVuelos] = useState([]);
@@ -50,5 +50,6 @@ const usePlanes = (selectedAirline) => {
 
   return { planes, loading, error };
 };
+
 
 export { useAerolineas, usePlanes };
