@@ -1,89 +1,84 @@
-import { useState } from 'react';
-import { signUp, login } from '../services/authService'; // Asegúrate de importar correctamente
-import  AlertToastify from './AlertToastify'
-
-
+// src/hooks/UseAuth.js
+import { useState, useContext } from "react";
+import { signUp, login } from "../services/authService";
+import { AuthContext, decodeToken } from "../context/authContext";
+import AlertToastify from "./AlertToastify";
+import { useNavigate } from 'react-router-dom'; // Importar useNavigate
 
 export const useAuth = (onOpenChange) => {
+  const { setUser } = useContext(AuthContext);
   const [selected, setSelected] = useState("login");
-  const [loginData, setLoginData] = useState({
-    email: "",
-    password: ""
-  });
-  const [signUpData, setSignUpData] = useState({
-    pasaporte: "",
-    nombres: "",
-    apellidos: "",
-    fechaNacimiento: "",
-    nation: "",
-    email: "",
-    codigoAreaPais: "",
-    tel: "",
-    telEmergencias: "",
-    direccion: "",
-    password: ""
-  });
-  const [error, setError] = useState("");
+  const [loginData, setLoginData] = useState({ email: "", password: "" });
+  const [signUpData, setSignUpData] = useState({ firstName: "", lastName: "", email: "", password: "", confirmPassword: "" });
+  const [error, setError] = useState(null);
+  const navigate = useNavigate(); // Usar useNavigate para redirigir
 
-  
-  // Validaciones
-  const validateEmail = (email) => {
-    return email.includes('@');
+  const handleInputChange = (e, form) => {
+    const { name, value } = e.target;
+    if (form === "login") {
+      setLoginData({ ...loginData, [name]: value });
+    } else {
+      setSignUpData({ ...signUpData, [name]: value });
+    }
   };
 
   const validatePassword = (password) => {
-    return password.length >= 6;
+    const regex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{6,}$/;
+    return regex.test(password);
   };
 
-  const handleInputChange = (event, type) => {
-    const { name, value } = event.target;
-    if (name === 'email' || name === 'password') {
-        setError(''); // Limpiar errores para campos específicos
+  const handleSignUp = async (e) => {
+    e.preventDefault();
+    if (signUpData.password !== signUpData.confirmPassword) {
+      AlertToastify('error', 'Contraseñas no coinciden');
+      setSignUpData({ ...signUpData, password: "", confirmPassword: "" });
+      return;
     }
-    if (type === 'login') {
-      setLoginData(prev => ({ ...prev, [name]: value }));
-    } else {
-      setSignUpData(prev => ({ ...prev, [name]: value }));
+
+    if (!validatePassword(signUpData.password)) {
+      AlertToastify('error', 'Contraseña insegura');
+      setSignUpData({ ...signUpData, password: "", confirmPassword: "" });
+      return;
     }
-  };
-
-  const handleSignUp = async (event) => {
-    event.preventDefault();
-     // Ejecutar validaciones
-     if (!validateEmail(signUpData.email)) {
-        setError("Por favor introduce un correo electrónico válido.");
-        return;
-      }
-      if (!validatePassword(signUpData.password)) {
-        setError("La contraseña debe tener al menos 6 caracteres.");
-        return;
-      }
-
     try {
-      const data = await signUp(signUpData);
-      console.log("Registration Successful", data);
-      AlertToastify('success','Usuario Creado')
+      await signUp(signUpData);
       onOpenChange(false);
-      setError('');
+      setTimeout(() => {
+        setSelected("login"); 
+        onOpenChange(true); 
+      }, 10); 
+      AlertToastify('success', 'Usuario Creado con Exito!');
     } catch (error) {
-      setError("Registration Failed: " + error.message);
+      if (error.response && error.response.data) {
+        if (error.response.status === 400) {
+          AlertToastify('error', error.response.data.message || 'Correo ya registrado');
+          setSignUpData({ ...signUpData, email: "" });
+        } else {
+          AlertToastify('error', error.response.data.message || 'Error al registrar!');
+        }
+      } else {
+        AlertToastify('error', 'Error de conexión o respuesta no estándar');
+      }
     }
   };
 
-  const handleLogin = async (event) => {
-    event.preventDefault();
-    if (!validateEmail(loginData.email) || !validatePassword(loginData.password)) {
-        setError("Correo electrónico o contraseña inválidos.");
-        return;
-      }
-  
+  const handleLogin = async (e) => {
+    e.preventDefault();
     try {
-      const response = await login(loginData);
-      console.log("Login successful", response);
+      const data = await login(loginData);
+      const decodedToken = decodeToken(data.token);
+      setUser({ email: loginData.email, role: decodedToken.role }); // Actualiza el contexto con la información del usuario
+
+      if (decodedToken.role === 'ADMIN') {
+        navigate('/dashBoard'); // Redirige a crear-vuelo
+      } else {
+        navigate('/'); // Redirige a la página principal
+      }
+
       onOpenChange(false);
-      AlertToastify('success','Logueado Exitosamente')
+      AlertToastify('success', 'Inicio de sesión Exitoso!');
     } catch (error) {
-      setError("Login Failed: " + (error.response?.data?.message || 'Failed to login'));
+      AlertToastify('error', 'Correo o Contraseña Incorrectas!');
     }
   };
 
@@ -95,4 +90,4 @@ export const useAuth = (onOpenChange) => {
     handleSignUp,
     handleLogin
   };
-}
+};

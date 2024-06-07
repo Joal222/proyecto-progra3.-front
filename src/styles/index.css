@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* En tu archivo CSS */
-@import "~slick-carousel/slick/slick.css"; 
-@import "~slick-carousel/slick/slick-theme.css";
 
 @keyframes fadeBackground {
     from {
