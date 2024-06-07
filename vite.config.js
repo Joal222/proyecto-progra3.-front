@@ -6,4 +6,10 @@ export default defineConfig({
   optimizeDeps: {
     include: ['jwt-decode'],
   },
+  build: {
+    outDir: 'dist',
+  },
+  preview: {
+    port: 5000,
+  },
 });
