@@ -13,4 +13,14 @@ export default defineConfig({
     port: 5000,
     host: '0.0.0.0'
   },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://proyecto-progra3.onrender.com',
+        changeOrigin: true,
+        secure: false,
+        rewrite: (path) => path.replace(/^\/api/, '')
+      }
+    }
+  }
 });
