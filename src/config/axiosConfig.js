@@ -3,7 +3,7 @@ import axios from "axios";
 
 // Configuración base de Axios
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8080/api/auth",  // Asegúrate de que la baseURL es correcta según tus rutas del backend
+  baseURL: "https://proyecto-progra3.onrender.com/api/auth",  // Asegúrate de que la baseURL es correcta según tus rutas del backend
   headers: {
     'Content-Type': 'application/json',
   }
@@ -38,7 +38,7 @@ export const paises = axios.create({
 
 // Instancia de Axios para vuelos
 export const vuelos = axios.create({
-  baseURL: "http://localhost:8080/api/vuelos",
+  baseURL: "https://proyecto-progra3.onrender.com/api/vuelos",
 });
 
 // Interceptor para adjuntar el token JWT a cada solicitud saliente en la instancia vuelos
@@ -54,7 +54,7 @@ vuelos.interceptors.request.use(function(config) {
 
 // Instancia de Axios para reportes
 export const reportes = axios.create({
-  baseURL: "http://localhost:8080/api/reports",
+  baseURL: "https://proyecto-progra3.onrender.com/api/reports",
 });
 
 // Interceptor para adjuntar el token JWT a cada solicitud saliente en la instancia reportes
